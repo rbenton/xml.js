@@ -1,0 +1,101 @@
+<!-- Copyright © 2015 W3C® (MIT, ERCIM, Keio, Beihang). This software or
+document includes material copied from or derived from "XML Schema Part 0:
+Primer Second Edition" at https://www.w3.org/TR/xmlschema-0/. -->
+<grammar datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+         xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <a:documentation>
+        Relax NG translation of ./test.xsd.
+    </a:documentation>
+    <start combine="choice">
+        <ref name="purchaseOrder"/>
+    </start>
+    <define name="purchaseOrder">
+        <element name="purchaseOrder">
+            <ref name="PurchaseOrderType"/>
+        </element>
+    </define>
+    <start combine="choice">
+        <ref name="comment"/>
+    </start>
+    <define name="comment">
+        <element name="comment">
+            <data type="string"/>
+        </element>
+    </define>
+    <define name="PurchaseOrderType">
+        <element name="shipTo">
+            <ref name="USAddress"/>
+        </element>
+        <element name="billTo">
+            <ref name="USAddress"/>
+        </element>
+        <optional>
+            <ref name="comment"/>
+        </optional>
+        <element name="items">
+            <ref name="Items"/>
+        </element>
+        <optional>
+            <attribute name="orderDate">
+                <data type="date"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="USAddress">
+        <element name="name">
+            <data type="string"/>
+        </element>
+        <element name="street">
+            <data type="string"/>
+        </element>
+        <element name="city">
+            <data type="string"/>
+        </element>
+        <element name="state">
+            <data type="string"/>
+        </element>
+        <element name="zip">
+            <data type="decimal"/>
+        </element>
+        <optional>
+            <attribute name="country">
+                <data type="NMTOKEN"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="Items">
+        <zeroOrMore>
+            <element name="item">
+                <element name="productName">
+                    <data type="string"/>
+                </element>
+                <element name="quantity">
+                    <data type="positiveInteger">
+                        <param name="maxExclusive">100</param>
+                    </data>
+                </element>
+                <element name="USPrice">
+                    <data type="decimal"/>
+                </element>
+                <optional>
+                    <ref name="comment"/>
+                </optional>
+                <optional>
+                    <element name="shipDate">
+                        <data type="date"/>
+                    </element>
+                </optional>
+                <attribute name="partNum">
+                    <ref name="SKU"/>
+                </attribute>
+            </element>
+        </zeroOrMore>
+    </define>
+    <!-- Stock Keeping Unit, a code for identifying products -->
+    <define name="SKU">
+        <data type="string">
+            <param name="pattern">\d{3}-[A-Z]{2}</param>
+        </data>
+    </define>
+</grammar>

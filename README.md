@@ -4,7 +4,9 @@ Online demo at http://syssgx.github.com/xml.js/
 This package exports the `xmllint` object which is an Emscripten port of
 libxml2's `xmllint` command for use in the browser or node.
 
-##### API #####
+#### API ####
+
+**XML Schema validation**
 
 ```javascript
 
@@ -14,6 +16,19 @@ Object xmllint.validateXML({
 });
 
 ```
+
+**Relax NG validation**
+
+```javascript
+
+Object xmllint.validateXML({
+	xml: "String",
+	relaxng: "String" || ["String", "String", ...]
+});
+
+```
+
+**Validation results**
 
 The return value Object has one property `errors` which is either null,
 in the case of no errors, or an Array of error strings....eg:
@@ -42,4 +57,14 @@ Install emscripten.
 	./script/test
 ```
 
-There are also equivalent `gulp` tasks.
+There are also equivalent `gulp` tasks and `npm` scripts.
+
+#### Building browserify test bundle ####
+
+Install Node and NPM.
+
+```
+    npm install
+    npm run bundle
+```
+Open ./test/test.html in a web browser.
