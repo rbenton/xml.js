@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+<!-- Copyright © 2015 W3C® (MIT, ERCIM, Keio, Beihang). This software or
+document includes material copied from or derived from "XML Schema Part 0:
+Primer Second Edition" at https://www.w3.org/TR/xmlschema-0/. -->
 <purchaseOrder orderDate="1999-10-20">
     <shipTo country="US">
         <name>Alice Smith</name>
