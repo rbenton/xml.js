@@ -16,12 +16,6 @@
     "browserify": "~8.1.3",
     "browserify-shim": "~3.8.2"
   },
-  "browserify": {
-    "transform": [
-      "brfs",
-      "browserify-shim"
-    ]
-  },
   "browserify-shim": {
     "xmllint": "global:xmllint"
   },
@@ -30,7 +24,7 @@
     "libxml2": "./script/libxml2",
     "compile": "./script/compile",
     "test": "./script/test",
-    "bundle": "browserify ./test/browserify-test.js -o ./test/bundle.js"
+    "bundle": "browserify ./test/browserify-test.js -t brfs -t browserify-shim -o ./test/bundle.js"
   },
   "repository": {
     "type": "git",
